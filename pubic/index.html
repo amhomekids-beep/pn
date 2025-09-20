@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework App</title>
+</head>
+<body>
+  <h1>Homework App</h1>
+  <button onclick="completeHomework()">Làm bài hôm nay</button>
+
+  <script src="worker.js"></script>
+  <script>
+    async function completeHomework() {
+      const userId = 1; // test user
+      await fetch('/complete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId })
+      });
+      alert('✅ Bạn đã làm bài hôm nay!');
+    }
+
+    // đăng ký push notification
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('worker.js');
+    }
+  </script>
+</body>
+</html>
